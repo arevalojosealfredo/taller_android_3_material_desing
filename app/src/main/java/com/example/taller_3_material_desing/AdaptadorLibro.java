@@ -1,5 +1,6 @@
 package com.example.taller_3_material_desing;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,17 +23,22 @@ public class AdaptadorLibro extends RecyclerView.Adapter<AdaptadorLibro.LibroVie
 
     @Override
     public LibroViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_libro, parent, false);
+        return new LibroViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LibroViewHolder holder, int position) {
-
+        Libro p = libros.get(position);
+        holder.foto.setImageResource(p.getFoto());
+        holder.isbn.setText(p.getIsbn());
+        holder.nombrelibro.setText(p.getNombrelibro());
+        holder.autorlibro.setText(p.getAutorlibro());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return libros.size();
     }
 
     public static class LibroViewHolder extends RecyclerView.ViewHolder{
