@@ -18,4 +18,5 @@
     <string name="boton_guardar">Guardar</string>
     <string name="boton_limpiar">Limpiar</string>
     <string name="mensaje_guardar">El libro ha sido guardado exitosamente</string>
+    <string name="titulo_detalle">DETALLE DEL LIBRO</string>
 </resources>
