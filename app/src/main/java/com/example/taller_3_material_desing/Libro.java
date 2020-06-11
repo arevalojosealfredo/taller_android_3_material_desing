@@ -5,10 +5,10 @@ public class Libro {
     private String nombrelibro;
     private String autorlibro;
     private String paisautor;
-    private int numeropaginas;
+    private String numeropaginas;
     private int foto;
 
-    public Libro (String isbn, String nombrelibro, String autorlibro, String paisautor, int numeropaginas, int foto){
+    public Libro (String isbn, String nombrelibro, String autorlibro, String paisautor, String numeropaginas, int foto){
         this.isbn = isbn;
         this.nombrelibro = nombrelibro;
         this.autorlibro = autorlibro;
@@ -49,11 +49,11 @@ public class Libro {
         this.paisautor = paisautor;
     }
 
-    public int getNumeropaginas() {
+    public String getNumeropaginas() {
         return numeropaginas;
     }
 
-    public void setNumeropaginas(int numeropaginas) {
+    public void setNumeropaginas(String numeropaginas) {
         this.numeropaginas = numeropaginas;
     }
 

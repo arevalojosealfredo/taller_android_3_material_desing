@@ -17,4 +17,5 @@
     <string name="numeropaginas">Número de Páginas</string>
     <string name="boton_guardar">Guardar</string>
     <string name="boton_limpiar">Limpiar</string>
+    <string name="mensaje_guardar">El libro ha sido guardado exitosamente</string>
 </resources>
