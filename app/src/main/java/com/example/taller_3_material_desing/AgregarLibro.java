@@ -23,6 +23,7 @@ public class AgregarLibro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_libro);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         isbn = findViewById(R.id.txtIsbn);
         nombrelibro = findViewById(R.id.txtNombreLibro);

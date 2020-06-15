@@ -16,9 +16,11 @@ import java.util.ArrayList;
 public class AdaptadorLibro extends RecyclerView.Adapter<AdaptadorLibro.LibroViewHolder>{
 
     private ArrayList<Libro> libros;
+    private OnLibroClickListener clickListener;
 
-    public AdaptadorLibro(ArrayList<Libro> libros){
+    public AdaptadorLibro(ArrayList<Libro> libros, OnLibroClickListener clickListener){
         this.libros = libros;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -29,11 +31,18 @@ public class AdaptadorLibro extends RecyclerView.Adapter<AdaptadorLibro.LibroVie
 
     @Override
     public void onBindViewHolder(@NonNull LibroViewHolder holder, int position) {
-        Libro p = libros.get(position);
+        final Libro p = libros.get(position);
         holder.foto.setImageResource(p.getFoto());
         holder.isbn.setText(p.getIsbn());
         holder.nombrelibro.setText(p.getNombrelibro());
         holder.autorlibro.setText(p.getAutorlibro());
+
+        holder.v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onLibroClick(p);
+            }
+        });
     }
 
     @Override
@@ -56,6 +65,10 @@ public class AdaptadorLibro extends RecyclerView.Adapter<AdaptadorLibro.LibroVie
             nombrelibro = v.findViewById(R.id.lblNombreLibro);
             autorlibro = v.findViewById(R.id.lblAutorLibro);
         }
+    }
+
+    public interface OnLibroClickListener{
+        void onLibroClick(Libro p);
     }
 
 }

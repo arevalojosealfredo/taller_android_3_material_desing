@@ -17,7 +17,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdaptadorLibro.OnLibroClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab;
         RecyclerView lstLibros;
         ArrayList<Libro> libros;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         lstLibros = findViewById(R.id.lstLibros);
         libros = Datos.obtener();
         llm = new LinearLayoutManager(this);
-        adapter = new AdaptadorLibro(libros);
+        adapter = new AdaptadorLibro(libros, this);
 
         llm.setOrientation(RecyclerView.VERTICAL);
         lstLibros.setLayoutManager(llm);
@@ -45,11 +46,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void agregar(View v){
-        Intent i;
-        i = new Intent(MainActivity.this, AgregarLibro.class);
-        startActivity(i);
+        Intent intent;
+        intent = new Intent(MainActivity.this, AgregarLibro.class);
+        startActivity(intent);
         finish();
     }
 
 
+    @Override
+    public void onLibroClick(Libro p) {
+        Intent intent;
+        Bundle bundle;
+
+        bundle = new Bundle();
+        bundle.putString("isbn", p.getIsbn());
+        bundle.putString("nombrelibro", p.getNombrelibro());
+        bundle.putString("autorlibro", p.getAutorlibro());
+        bundle.putInt("foto", p.getFoto());
+
+        intent = new Intent(MainActivity.this, DetalleLibro.class);
+        intent.putExtra("datos", bundle);
+        startActivity(intent);
+        finish();
+    }
 }
