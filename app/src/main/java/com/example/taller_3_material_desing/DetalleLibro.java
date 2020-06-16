@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class DetalleLibro extends AppCompatActivity {
 
@@ -21,14 +27,16 @@ public class DetalleLibro extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_libro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ImageView foto;
+        final ImageView foto;
         TextView isbn, nombrelibro, autorlibro, paisautor, numeropaginas;
         Bundle bundle;
         Intent intent;
 
-        String codigoisbn, nombredellibro, autordellibro;
+        String id, codigoisbn, nombredellibro, autordellibro;
         String paisdelautor, numerodepaginas;
-        int fot;
+        final int fot;
+
+        StorageReference storageReference;
 
         foto = findViewById(R.id.imgFotoDetalle);
         isbn = findViewById(R.id.lblIsbnDetalle);
@@ -41,21 +49,29 @@ public class DetalleLibro extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getBundleExtra("datos");
 
-        fot = bundle.getInt("foto");
+        id = bundle.getString("foto");
         codigoisbn = bundle.getString("isbn");
         nombredellibro = bundle.getString("nombrelibro");
         autordellibro = bundle.getString("autorlibro");
         paisdelautor = bundle.getString("paisautor");
         numerodepaginas = bundle.getString("numeropaginas");
 
-        foto.setImageResource(fot);
+        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference.child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(foto);
+            }
+        });
+
+        //foto.setImageResource(fot);
         isbn.setText(codigoisbn);
         nombrelibro.setText(nombredellibro);
         autorlibro.setText(autordellibro);
         //paisautor.setText(paisdelautor);
         //numeropaginas.setText(numerodepaginas);
 
-        p = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, fot);
+        p = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, 0, id);
     }
 
     public void onBackPressed(){

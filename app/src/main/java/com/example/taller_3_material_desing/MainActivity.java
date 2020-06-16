@@ -91,10 +91,11 @@ public class MainActivity extends AppCompatActivity implements AdaptadorLibro.On
         Bundle bundle;
 
         bundle = new Bundle();
+
+        bundle.putString("foto", p.getId());
         bundle.putString("isbn", p.getIsbn());
         bundle.putString("nombrelibro", p.getNombrelibro());
         bundle.putString("autorlibro", p.getAutorlibro());
-        bundle.putInt("foto", p.getFoto());
 
         intent = new Intent(MainActivity.this, DetalleLibro.class);
         intent.putExtra("datos", bundle);

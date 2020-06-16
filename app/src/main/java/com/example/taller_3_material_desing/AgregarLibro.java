@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,6 +23,8 @@ public class AgregarLibro extends AppCompatActivity {
 
     private ArrayList<Integer> fotos;
     private EditText isbn, nombrelibro, autorlibro, paisautor, numeropaginas;
+
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class AgregarLibro extends AppCompatActivity {
         fotos.add(R.drawable.images7);
         fotos.add(R.drawable.images8);
 
+        storageReference = FirebaseStorage.getInstance().getReference();
+
     }
 
     public void guardar(View v){
@@ -62,10 +71,18 @@ public class AgregarLibro extends AppCompatActivity {
 
         libro = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, foto, id);
         libro.guardar();
+        subir_foto(id, foto);
+
         limpiar();
 
         imp.hideSoftInputFromWindow(isbn.getWindowToken(), 0);
         Snackbar.make(v, getString(R.string.mensaje_guardar), Snackbar.LENGTH_LONG).show();
+    }
+
+    public void  subir_foto(String id, int foto){
+        StorageReference child = storageReference.child(id);
+        Uri uri = Uri.parse("android.resource://"+R.class.getPackage().getName()+"/"+foto);
+        UploadTask uploadTask = child.putFile(uri);
     }
 
     public void limpiar(View v){
