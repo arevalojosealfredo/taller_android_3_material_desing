@@ -32,6 +32,7 @@
             android:id="@+id/menu_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="eliminar"
             android:src="@android:drawable/ic_menu_delete"
             fab:fab_label="@string/etiqueta_boton_eliminar"
             fab:fab_size="mini" />
@@ -55,8 +56,9 @@
 
         <ImageView
             android:id="@+id/imgFotoDetalle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="319dp"
+            android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/images5" />
 
         <TableLayout

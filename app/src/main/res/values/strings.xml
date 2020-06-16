@@ -20,4 +20,8 @@
     <string name="mensaje_guardar">El libro ha sido guardado exitosamente</string>
     <string name="titulo_detalle">DETALLE DEL LIBRO</string>
     <string name="etiqueta_boton_eliminar">Eliminar</string>
+    <string name="titulo_eliminar">Eliminar Libro</string>
+    <string name="pregunta_mensaje_eliminar">¿Estás seguro que deseas eliminar este libro?</string>
+    <string name="opcion_si">Si</string>
+    <string name="opcion_no">No</string>
 </resources>

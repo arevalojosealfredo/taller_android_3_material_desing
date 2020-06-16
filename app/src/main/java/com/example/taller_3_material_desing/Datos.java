@@ -11,4 +11,16 @@ public class Datos {
     public static ArrayList<Libro> obtener(){
         return libros;
     }
+
+    public static void eliminar(Libro p){
+        //libros.remove(p);
+
+        for (int i = 0; i < libros.size(); i++){
+            if (libros.get(i).getIsbn().equals(p.getIsbn())){
+                libros.remove(i);
+                break;
+            }
+        }
+
+    }
 }
