@@ -28,6 +28,10 @@ public class Datos {
         return libros;
     }
 
+    public static void setLibros(ArrayList<Libro> libros){
+        libros = libros;
+    }
+
     public static void eliminar(Libro p){
         //libros.remove(p);
 

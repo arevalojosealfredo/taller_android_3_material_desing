@@ -5,7 +5,13 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,12 +35,15 @@ public class MainActivity extends AppCompatActivity implements AdaptadorLibro.On
 
         FloatingActionButton fab;
         RecyclerView lstLibros;
-        ArrayList<Libro> libros;
+        final ArrayList<Libro> libros;
         LinearLayoutManager llm;
-        AdaptadorLibro adapter;
+        final AdaptadorLibro adapter;
+
+        DatabaseReference databaseReference;
+        String db = "Libros";
 
         lstLibros = findViewById(R.id.lstLibros);
-        libros = Datos.obtener();
+        libros = new ArrayList<>();
         llm = new LinearLayoutManager(this);
         adapter = new AdaptadorLibro(libros, this);
 
@@ -43,6 +52,29 @@ public class MainActivity extends AppCompatActivity implements AdaptadorLibro.On
         lstLibros.setAdapter(adapter);
 
         fab = findViewById(R.id.btnAgregar);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(db).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                libros.clear();
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                        Libro p = snapshot.getValue(Libro.class);
+                        libros.add(p);
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+                Datos.setLibros(libros);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void agregar(View v){

@@ -19,6 +19,10 @@ public class Libro {
         this.foto = foto;
     }
 
+    public Libro(){
+
+    }
+
     public Libro (String isbn, String nombrelibro, String autorlibro, String paisautor, String numeropaginas, int foto, String id){
         this.isbn = isbn;
         this.nombrelibro = nombrelibro;
