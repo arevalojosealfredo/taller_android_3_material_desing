@@ -8,6 +8,8 @@ public class Libro {
     private String numeropaginas;
     private int foto;
 
+    private String id;
+
     public Libro (String isbn, String nombrelibro, String autorlibro, String paisautor, String numeropaginas, int foto){
         this.isbn = isbn;
         this.nombrelibro = nombrelibro;
@@ -16,6 +18,24 @@ public class Libro {
         this.numeropaginas = numeropaginas;
         this.foto = foto;
     }
+
+    public Libro (String isbn, String nombrelibro, String autorlibro, String paisautor, String numeropaginas, int foto, String id){
+        this.isbn = isbn;
+        this.nombrelibro = nombrelibro;
+        this.autorlibro = autorlibro;
+        this.paisautor = paisautor;
+        this.numeropaginas = numeropaginas;
+        this.foto = foto;
+        this.id = id;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+
+
 
     public String getIsbn() {
         return isbn;

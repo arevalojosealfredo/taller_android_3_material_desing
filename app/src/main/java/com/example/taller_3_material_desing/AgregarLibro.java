@@ -44,7 +44,7 @@ public class AgregarLibro extends AppCompatActivity {
     }
 
     public void guardar(View v){
-        String codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas;
+        String codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, id;
         int foto;
         Libro libro;
 
@@ -57,7 +57,10 @@ public class AgregarLibro extends AppCompatActivity {
         numerodepaginas = numeropaginas.getText().toString();
 
         foto = foto_aleatoria();
-        libro = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, foto);
+
+        id = Datos.getId();
+
+        libro = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, foto, id);
         libro.guardar();
         limpiar();
 

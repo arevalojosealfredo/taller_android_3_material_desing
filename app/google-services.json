@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1049981306530",
+    "firebase_url": "https://taller-3-material-desing.firebaseio.com",
+    "project_id": "taller-3-material-desing",
+    "storage_bucket": "taller-3-material-desing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049981306530:android:e1283668464557580779fb",
+        "android_client_info": {
+          "package_name": "com.example.taller_3_material_desing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049981306530-j8chdcara6di3h9j2884h61vm3sb3fo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taller_3_material_desing",
+            "certificate_hash": "808f1e37a77128c8d3b5780b0034494eadba67c7"
+          }
+        },
+        {
+          "client_id": "1049981306530-vki5s90boj5j5nbpv9ljb4e3hb594gav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU_GFGX-RPbXVceEJbrpe3C534RcJQIwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049981306530-vki5s90boj5j5nbpv9ljb4e3hb594gav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
