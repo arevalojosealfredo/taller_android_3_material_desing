@@ -68,8 +68,6 @@ public class DetalleLibro extends AppCompatActivity {
         isbn.setText(codigoisbn);
         nombrelibro.setText(nombredellibro);
         autorlibro.setText(autordellibro);
-        //paisautor.setText(paisdelautor);
-        //numeropaginas.setText(numerodepaginas);
 
         p = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, 0, id);
     }

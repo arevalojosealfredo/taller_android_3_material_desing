@@ -49,7 +49,7 @@ public class AdaptadorLibro extends RecyclerView.Adapter<AdaptadorLibro.LibroVie
             }
         });
 
-        //holder.foto.setImageResource(p.getFoto());
+
         holder.isbn.setText(p.getIsbn());
         holder.nombrelibro.setText(p.getNombrelibro());
         holder.autorlibro.setText(p.getAutorlibro());
