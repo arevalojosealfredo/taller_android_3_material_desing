@@ -24,4 +24,5 @@
     <string name="pregunta_mensaje_eliminar">¿Estás seguro que deseas eliminar este libro?</string>
     <string name="opcion_si">Si</string>
     <string name="opcion_no">No</string>
+    <string name="titulo_ventana_seleccionar_foto">Por favor, seleccione la foto</string>
 </resources>

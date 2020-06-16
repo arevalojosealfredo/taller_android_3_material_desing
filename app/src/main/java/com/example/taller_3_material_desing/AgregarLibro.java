@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +27,9 @@ public class AgregarLibro extends AppCompatActivity {
 
     private StorageReference storageReference;
 
+    private Uri uri;
+    private ImageView foto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class AgregarLibro extends AppCompatActivity {
         autorlibro = findViewById(R.id.txtAutorLibro);
         paisautor = findViewById(R.id.txtPaisAutor);
         numeropaginas = findViewById(R.id.txtNumeroPaginas);
+
+        foto = findViewById(R.id.imgFotoSeleccionada);
 
         fotos = new ArrayList<>();
         fotos.add(R.drawable.images1);
@@ -71,7 +77,7 @@ public class AgregarLibro extends AppCompatActivity {
 
         libro = new Libro(codigoisbn, nombredellibro, autordellibro, paisdelautor, numerodepaginas, foto, id);
         libro.guardar();
-        subir_foto(id, foto);
+        subir_foto(id);
 
         limpiar();
 
@@ -79,9 +85,9 @@ public class AgregarLibro extends AppCompatActivity {
         Snackbar.make(v, getString(R.string.mensaje_guardar), Snackbar.LENGTH_LONG).show();
     }
 
-    public void  subir_foto(String id, int foto){
+    public void  subir_foto(String id){
         StorageReference child = storageReference.child(id);
-        Uri uri = Uri.parse("android.resource://"+R.class.getPackage().getName()+"/"+foto);
+
         UploadTask uploadTask = child.putFile(uri);
     }
 
@@ -104,12 +110,33 @@ public class AgregarLibro extends AppCompatActivity {
         numeropaginas.setText("");
 
         isbn.requestFocus();
+
+        foto.setImageResource(android.R.drawable.ic_menu_gallery);
     }
 
     public void onBackPressed(){
         finish();
         Intent i = new Intent(AgregarLibro.this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void seleccionar_foto(View v){
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, getString(R.string.titulo_ventana_seleccionar_foto)),1);
+    }
+
+    protected void onActivityResult(int requesCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requesCode, resultCode, data);
+
+        if (requesCode == 1){
+            uri = data.getData();
+            if (uri != null){
+                foto.setImageURI(uri);
+            }
+        }
     }
 
 }
